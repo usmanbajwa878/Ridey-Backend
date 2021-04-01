@@ -1,0 +1,1 @@
+exports.DATABASE_URL = 'mongodb+srv://usmanbajwa:codealpha420@cluster0.kjczi.mongodb.net/Ridey-App?retryWrites=true&w=majority'
