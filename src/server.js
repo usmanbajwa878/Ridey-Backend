@@ -87,6 +87,7 @@ const mockData = {
     // socket.broadcast.emit("AcceptRequestUser", data);
     // socket.emit('AcceptRequestUser',data)
     console.log("accept", data);
+    socket.emit("roomConnected",data)
   
   }); 
   console.log(io.allSockets());
