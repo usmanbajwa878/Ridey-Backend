@@ -11,6 +11,7 @@ const { OK, UN_AUTH, FAILED, NOT_FOUND, SUCCESS } = require('../Constants/Status
 
 
 exports.createTripSchema = (req, requestData) => {
+
     const trip = new Trip({
         tripId: requestData.requestId,
         driverId: req.body.driverId,
@@ -25,7 +26,15 @@ exports.createTripSchema = (req, requestData) => {
         user: requestData.user,
         driver: req.body.driver,
         rating:'',
-        comments: ''
+        comments: '',
+        driverInitialCoords:{
+        latitude:req.body.driverLat,
+        longitude:req.body.driverLong
+         },
+         userInitialCoords:{
+            latitude:req.body.userLat,
+            longitude:req.body.userLong
+         }
     })
     return trip;
 }
@@ -34,7 +43,7 @@ exports.createTripSchema = (req, requestData) => {
 exports.updateTripStatus = async (req) => {
     let responseData;
     const data = await Trip.find({ driverId: req.body.driverId });
-    console.log("data",data)
+   
     if (data.length !== 0) {
         responseData = await DriverTrip.findOneAndUpdate(
             { driverId: req.body.driverId },
@@ -75,6 +84,13 @@ exports.makeTripComplete = async (req) => {
     return responseData
 
 }
+exports.getSpecficTrip = async (req) => {
+   
+    const data = await Trip.find({ tripId: req.body.tripId })
+    return data
+
+}
+
 
 
 

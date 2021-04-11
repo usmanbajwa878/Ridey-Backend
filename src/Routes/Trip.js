@@ -17,7 +17,7 @@ const {
     SUCCESS,
 } = require('../Constants/StatusCode');
 const { generateMessage, } = require('../utils/generateMessage');
-const { createTripSchema, getDriverTrips, updateTripStatus, getUserTrips, getAllTrips, makeTripComplete } = require('../utils/Trip');
+const { createTripSchema, getDriverTrips, updateTripStatus, getUserTrips, getAllTrips, makeTripComplete,getSpecficTrip } = require('../utils/Trip');
 const { createReqObject, findRequest, deleteRequest } = require('../utils/Request');
 const { MakeDriverOffline } = require('../utils/Driver');
 
@@ -26,12 +26,15 @@ const { MakeDriverOffline } = require('../utils/Driver');
 
 exports.AddTrip = async (req, res) => {
     try {
-        const { isExists, data } = await findRequest(req)
+        const { isExists, data } = await findRequest(req);
+       console.log("isExists",isExists)
         if (isExists) {
             const tripObj = await createTripSchema(req, data[0]);
+         
             await tripObj.save();
-            await deleteRequest(data[0].requestId);
-            await MakeDriverOffline(req.body.driverId);
+           const deleteStatus =  await deleteRequest(data[0].requestId);
+           console.log("deleteStatus",deleteStatus)
+           await MakeDriverOffline(req.body.driverId);
             return res.status(OK).json(generateMessage(TRIP_ADDED_SUCCESS, OK, SUCCESS_TRUE, tripObj));
         } else {
             return res.status(FAILED).json(generateMessage(
@@ -43,6 +46,7 @@ exports.AddTrip = async (req, res) => {
         }
     }
     catch (error) {
+        console.log(error)
         return res.status(FAILED).json(generateMessage(
             TRIP_ADDED_FAILED,
             FAILED,
@@ -107,6 +111,14 @@ exports.AcceptTrip = async (req, res) => {
     }
 }
 
+exports.GetSpecficTrip =async (req,res)=>{
+    const result = await getSpecficTrip(req);
+    if (result) {
+        return res.status(OK).json(generateMessage(TRIP_FOUND_SUCCESS, SUCCESS, SUCCESS_TRUE, result))
+    } else {
+        return res.status(FAILED).json(generateMessage(TRIP_EMPTY, FAILED, SUCCESS_FALSE, null))
+    }
+}
 
 
 exports.getDriverTrips = async (req, res) => {

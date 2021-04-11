@@ -83,15 +83,16 @@ const mockData = {
     console.log("accept", data);
   });
   socket.on("roomConnection", (data) => {
+    console.log("roomconnection")
     socket.join(data.roomId);
     // socket.broadcast.emit("AcceptRequestUser", data);
     // socket.emit('AcceptRequestUser',data)
     console.log("accept", data);
-    socket.emit("roomConnected",data)
+    socket.to(data.roomId).emit("roomConnected",data)
   
   }); 
   console.log(io.allSockets());
-
+console.log("io",io)
 });
 server.listen(port, () => {
   console.log("server is online on port number" + port);

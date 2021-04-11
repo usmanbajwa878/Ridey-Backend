@@ -7,12 +7,13 @@ const {
     TRIP_GET_BY_DRIVER,
     TRIP_GET_BY_USER,
     TRIP_COMPLETE,
-    TRIP_ACCEPT
-
+    TRIP_ACCEPT,
+    TRIP_GET_SPECIFIC
+    
 
 } = require('../Constants/Routes');
 
-const { AddTrip, getAllTrips, getUserTrips, getDriverTrips,CompleteTrip,AcceptTrip } = require('../Routes/Trip');
+const { AddTrip, getAllTrips, getUserTrips, getDriverTrips,CompleteTrip,AcceptTrip,GetSpecficTrip } = require('../Routes/Trip');
 
 
 exports.TRIP_ADD = router.post(TRIP_POST, AddTrip);
@@ -21,3 +22,4 @@ exports.TRIPS_GET_USER = router.post(TRIP_GET_BY_USER, getUserTrips);
 exports.TRIPS_GET_DRIVER = router.post(TRIP_GET_BY_DRIVER, getDriverTrips);
 exports.COMPLETE_TRIP  = router.post(TRIP_COMPLETE,CompleteTrip)
 exports.ACCEPT_TRIP  = router.post(TRIP_ACCEPT,AcceptTrip)
+exports.GET_SPECIFIC = router.post(TRIP_GET_SPECIFIC,GetSpecficTrip)

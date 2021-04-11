@@ -76,6 +76,7 @@ app.use(TRIP, tripController.TRIPS_GET_DRIVER);
 app.use(TRIP, tripController.TRIP_ADD);
 app.use(TRIP,tripController.COMPLETE_TRIP);
 app.use(TRIP,tripController.ACCEPT_TRIP);
+app.use(TRIP,tripController.GET_SPECIFIC);
 //REQUESTS
 app.use(REQUEST, requestController.REQUEST_GET);
 app.use(REQUEST, requestController.REQUEST_ADD);

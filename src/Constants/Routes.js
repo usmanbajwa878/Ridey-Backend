@@ -30,6 +30,7 @@ exports.TRIP = '/trip';
 exports.TRIPS_GET = '/getTrip';
 exports.TRIP_GET_BY_USER = '/getTrip/user';
 exports.TRIP_GET_BY_DRIVER = '/getTrip/driver';
+exports.TRIP_GET_SPECIFIC = '/getTrip/specfic';
 exports.TRIP_POST = '/addTrip';
 exports.TRIP_COMPLETE = '/completeTrip';
 exports.TRIP_ACCEPT = '/acceptTrip';

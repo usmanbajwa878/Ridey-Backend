@@ -15,7 +15,15 @@ const trip = mongoose.Schema({
     date: { type: String, required: true },
     vehicle: { type: Object, required: true },
     rating:{type:String},
-    comments:{type:String}
+    comments:{type:String},
+    driverInitialCoords:{
+        latitude:{type:String,required:true},
+        longitude:{type:String,required:true}
+    },
+    userInitialCoords:{
+        latitude:{type:String,required:true},
+        longitude:{type:String,required:true}
+    }
 });
 
 

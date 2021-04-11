@@ -20,7 +20,7 @@ exports.deleteRequest = async (id) => {
     let status = false;
     console.log("deleteId IN REQUEST",id)
     const data = await Request.findOneAndDelete({ requestId: id });
-    console.log("delete",data);
+   
     status = true;
     return status;
 }
