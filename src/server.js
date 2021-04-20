@@ -72,7 +72,7 @@ const mockData = {
   });
   //  socket.emit('IncomingRequest',mockData)
   socket.on("AcceptRequest", (acceptdata) => {
-      
+  
       const roomId = uuid();
       socket.join(roomId);
       console.log("roomId",roomId)
@@ -91,9 +91,31 @@ const mockData = {
     socket.to(data.roomId).emit("roomConnected",data)
   
   }); 
-  console.log(io.allSockets());
-console.log("io",io)
+  socket.on('location',(data)=>{
+    console.log(data,"location EMit")
+    socket.broadcast.emit('locationTracking',data)
+  })
+
+  socket.on("chat", (data) => {
+    console.log("chatConnection",data)
+      socket.broadcast.emit('chat',data)
+  
+  }); 
+  socket.on("message", (data) => {
+    console.log("messge",data)
+    data._id = uuid();
+      socket.broadcast.emit('Incomingmessage',data)
+  
+  }); 
+  socket.on('Incomingmessage',(data)=>{
+    data._id = uuid();
+    console.log("Incomign data",data)
+  })
+   
+
+
 });
+
 server.listen(port, () => {
   console.log("server is online on port number" + port);
 });
